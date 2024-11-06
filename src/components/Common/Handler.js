@@ -9,15 +9,15 @@ const unblocker = (Block, prop) => {
 };
 
 const URLs = {
-    home: { link: "/", route: <Home /> },
+    home: { link: "/", route: <Home />, unblock: Home },
     edit: { link: "/edit/", route: <Edit />, unblock: Edit },
     comment: {
         link: "/comment/",
         route: <Comment />,
         unblock: Comment,
     },
-    create: { link: "/create", route: <Add /> },
-    list: { link: "/list", route: <List /> },
+    create: { link: "/create", route: <Add />, unblock: Add },
+    list: { link: "/list", route: <List />, unblock: List },
     unblock: unblocker,
 };
 
