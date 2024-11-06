@@ -32,20 +32,35 @@ const ShowUser_temp = () => {
         }
     };
 
-    useEffect(() => {
-        getUsers();
-    }, []);
+    // const getUsers = () => {
+    //     axios
+    //         .get(ShowUser_tempApi)
+    //         .then((res) => {
+    //             setUser(res.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // };
 
-    const getUsers = () => {
-        axios
-            .get(ShowUser_tempApi)
-            .then((res) => {
-                setUser(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+    // useEffect(() => {
+    //     getUsers();
+    // }, []);
+
+    useEffect(() => {
+        const getUsers = () => {
+            axios
+                .get(ShowUser_tempApi)
+                .then((res) => {
+                    setUser(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+
+        getUsers();
+    }, [ShowUser_tempApi]);
 
     if (user.length < 0) {
         return <h1>no comment found</h1>;
@@ -66,6 +81,9 @@ const ShowUser_temp = () => {
                     </thead>
                     <tbody>
                         {user?.map((item, i) => {
+                            const idProp = {
+                                id: item.id,
+                            };
                             return (
                                 <tr key={i + 1}>
                                     <td>{i + 1}</td>
@@ -117,7 +135,7 @@ const ShowUser_temp = () => {
                                                         hanlder["edit"][
                                                             "unblock"
                                                         ],
-                                                        item.id
+                                                        idProp
                                                     )}
                                                 </div>
                                             </div>

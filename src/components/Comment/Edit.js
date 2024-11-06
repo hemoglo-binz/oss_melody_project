@@ -14,10 +14,6 @@ const EditUser = ({ id }) => {
     // const navigate = useNavigate();
     const getUserApi = Api();
 
-    useEffect(() => {
-        getUser();
-    }, []);
-
     const getUser = () => {
         axios
             .get(getUserApi.concat("/") + id)
@@ -28,6 +24,10 @@ const EditUser = ({ id }) => {
                 console.log(err);
             });
     };
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     const handelInput = (e) => {
         e.preventDefault();

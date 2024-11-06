@@ -8,10 +8,6 @@ const EditUser = () => {
     const { id } = useParams();
     const getUserApi = Api();
 
-    useEffect(() => {
-        getUser();
-    }, []);
-
     const getUser = () => {
         axios
             .get(getUserApi.concat("/") + id)
@@ -22,6 +18,10 @@ const EditUser = () => {
                 console.log(err);
             });
     };
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <div className="user mt-5">

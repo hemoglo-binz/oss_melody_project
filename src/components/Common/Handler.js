@@ -5,7 +5,7 @@ import Comment from "../Comment/Comment";
 import Home from "../Layout/Home";
 
 const unblocker = (Block, prop) => {
-    return <Block id={prop} />;
+    return <Block {...prop} />;
 };
 
 const URLs = {
