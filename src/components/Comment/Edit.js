@@ -14,20 +14,35 @@ const EditUser = ({ id }) => {
     // const navigate = useNavigate();
     const getUserApi = Api();
 
-    const getUser = () => {
-        axios
-            .get(getUserApi.concat("/") + id)
-            .then((item) => {
-                setUser(item.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+    // const getUser = () => {
+    //     axios
+    //         .get(getUserApi.concat("/") + id)
+    //         .then((item) => {
+    //             setUser(item.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     getUser();
+    // }, []);
 
     useEffect(() => {
+        const getUser = () => {
+            axios
+                .get(getUserApi.concat("/") + id)
+                .then((item) => {
+                    setUser(item.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+
         getUser();
-    }, []);
+    }, [getUserApi]);
 
     const handelInput = (e) => {
         e.preventDefault();
