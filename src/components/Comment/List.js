@@ -28,6 +28,7 @@ const ShowUser_temp = () => {
             setError(error.message);
         } finally {
             setIsLoading(false);
+            window.location.replace("/");
         }
     };
 
