@@ -42,7 +42,7 @@ const EditUser = ({ id }) => {
         };
 
         getUser();
-    }, [getUserApi]);
+    }, [getUserApi, id]);
 
     const handelInput = (e) => {
         e.preventDefault();

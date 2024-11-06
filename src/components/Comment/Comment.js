@@ -36,7 +36,7 @@ const EditUser = () => {
         };
 
         getUser();
-    }, [getUserApi]);
+    }, [getUserApi, id]);
 
     return (
         <div className="user mt-5">
