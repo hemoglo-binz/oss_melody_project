@@ -1,30 +1,40 @@
 import "./App.css";
-import CreateUser from "./components/User/CreateUser";
-import ShowUser from "./components/User/ShowUser";
 import { Route, Routes } from "react-router-dom";
-import EditUser from "./components/User/EditUser";
-import User from "./components/User/User";
 import Header from "./components/Common/Header";
-import Home from "./components/Layout/Home";
+import URLhdl from "./components/Common/Handler";
 function App() {
-  return (
-    <div className="App">
-      <header className="container">
-        <div className="">
-          <Header />
-          <Routes>
-          
-            <Route path="/" element={<Home />} />
-            <Route path="/edit-user/:id" element={<EditUser />} />
-            <Route path="/user/:id" element={<User />} />
-            <Route path="/create-user" element={<CreateUser />} />
-            <Route path="/show-user" element={<ShowUser />} />
-          </Routes>
-          
+    const hanlder = URLhdl();
+    return (
+        <div className="App">
+            <header className="container">
+                <div className="">
+                    <Header />
+                    <Routes>
+                        <Route
+                            path={hanlder["home"]["link"]}
+                            element={hanlder["home"]["route"]}
+                        />
+                        <Route
+                            path={hanlder["edit"]["link"] + ":id"}
+                            element={hanlder["edit"]["route"]}
+                        />
+                        <Route
+                            path={hanlder["comment"]["link"] + ":id"}
+                            element={hanlder["comment"]["route"]}
+                        />
+                        <Route
+                            path={hanlder["create"]["link"]}
+                            element={hanlder["create"]["route"]}
+                        />
+                        <Route
+                            path={hanlder["list"]["link"]}
+                            element={hanlder["list"]["route"]}
+                        />
+                    </Routes>
+                </div>
+            </header>
         </div>
-      </header>
-    </div>
-  );
+    );
 }
 
 export default App;
