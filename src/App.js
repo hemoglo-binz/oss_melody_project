@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Common/Header";
 import URLhdl from "./components/Common/Handler";
 function App() {
-    const hanlder = URLhdl();
+    const handler = URLhdl();
     return (
         <div className="App">
             <header className="container">
@@ -11,24 +11,24 @@ function App() {
                     <Header />
                     <Routes>
                         <Route
-                            path={hanlder["home"]["link"]}
-                            element={hanlder["home"]["route"]}
+                            path={handler["home"]["link"]}
+                            element={handler["home"]["route"]}
                         />
                         <Route
-                            path={hanlder["edit"]["link"] + ":id"}
-                            element={hanlder["edit"]["route"]}
+                            path={handler["edit"]["link"] + ":id"}
+                            element={handler["edit"]["route"]}
                         />
                         <Route
-                            path={hanlder["comment"]["link"] + ":id"}
-                            element={hanlder["comment"]["route"]}
+                            path={handler["comment"]["link"] + ":id"}
+                            element={handler["comment"]["route"]}
                         />
                         <Route
-                            path={hanlder["create"]["link"]}
-                            element={hanlder["create"]["route"]}
+                            path={handler["create"]["link"]}
+                            element={handler["create"]["route"]}
                         />
                         <Route
-                            path={hanlder["list"]["link"]}
-                            element={hanlder["list"]["route"]}
+                            path={handler["list"]["link"]}
+                            element={handler["list"]["route"]}
                         />
                     </Routes>
                 </div>

@@ -4,13 +4,13 @@ import Loader from "../Common/Loader";
 import Api from "../Common/Api";
 import "./Comment.css";
 // import URLhdl from "../Common/Handler";
-const CreateUser_temp = () => {
-    // const hanlder = URLhdl();
+const CreateCC_temp = () => {
+    // const handler = URLhdl();
     // const navigate = useNavigate();
-    const createUserApi = Api();
+    const createCCApi = Api();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [user, setUser] = useState({
+    const [_com, setCC] = useState({
         id: "",
         userID: "",
         title: "",
@@ -21,32 +21,32 @@ const CreateUser_temp = () => {
         event.preventDefault();
         const { name, value } = event.target;
         console.log(name, value);
-        setUser({ ...user, [name]: value });
+        setCC({ ..._com, [name]: value });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(user);
+        console.log(_com);
         try {
             setIsLoading(true);
 
-            const response2 = await fetch(createUserApi, {
+            const response2 = await fetch(createCCApi, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(user),
+                body: JSON.stringify(_com),
             });
 
             if (response2.ok) {
                 console.log("Form submitted successfully!");
-                setUser({
+                setCC({
                     id: "",
                     userID: "",
                     title: "",
                     body: "",
                 });
-                // navigate(hanlder["list"]["link"]);
+                // navigate(handler["list"]["link"]);
                 window.location.replace("/");
             } else {
                 console.error("Form submission failed!");
@@ -68,7 +68,7 @@ const CreateUser_temp = () => {
                     aria-label="Close"
                 ></button>
             </div>
-            <div className="user-form">
+            <div className="_com-form">
                 <div className="heading">
                     {isLoading && <Loader />}
                     {error && <p>Error: {error}</p>}
@@ -84,7 +84,7 @@ const CreateUser_temp = () => {
                             className="form-control"
                             id="userID"
                             name="userID"
-                            value={user.userID}
+                            value={_com.userID}
                             onChange={handleInput}
                         />
                     </div>
@@ -97,7 +97,7 @@ const CreateUser_temp = () => {
                             className="form-control"
                             id="title"
                             name="title"
-                            value={user.title}
+                            value={_com.title}
                             onChange={handleInput}
                         />
                     </div>
@@ -110,7 +110,7 @@ const CreateUser_temp = () => {
                             className="form-control"
                             id="body"
                             name="body"
-                            value={user.body}
+                            value={_com.body}
                             onChange={handleInput}
                         />
                     </div>
@@ -127,4 +127,4 @@ const CreateUser_temp = () => {
     );
 };
 
-export default CreateUser_temp;
+export default CreateCC_temp;

@@ -5,11 +5,11 @@ import Loader from "../Common/Loader";
 import Api from "../Common/Api";
 import URLhdl from "../Common/Handler";
 
-const ShowUser_temp = () => {
-    const hanlder = URLhdl();
-    const ShowUser_tempApi = Api();
+const ShowCC_temp = () => {
+    const handler = URLhdl();
+    const ShowCC_tempApi = Api();
 
-    const [user, setUser] = useState([]);
+    const [_com, setCC] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -17,13 +17,13 @@ const ShowUser_temp = () => {
         console.log("id : -", id);
         setIsLoading(true);
         try {
-            const response = await fetch(ShowUser_tempApi.concat("/") + id, {
+            const response = await fetch(ShowCC_tempApi.concat("/") + id, {
                 method: "DELETE",
             });
             if (!response.ok) {
                 throw new Error("Failed to delete item");
             }
-            setUser(user.filter((item) => item.id !== id));
+            setCC(_com.filter((item) => item.id !== id));
         } catch (error) {
             setError(error.message);
         } finally {
@@ -32,37 +32,22 @@ const ShowUser_temp = () => {
         }
     };
 
-    // const getUsers = () => {
-    //     axios
-    //         .get(ShowUser_tempApi)
-    //         .then((res) => {
-    //             setUser(res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getUsers();
-    // }, []);
-
     useEffect(() => {
-        const getUsers = () => {
+        const getCCs = () => {
             axios
-                .get(ShowUser_tempApi)
+                .get(ShowCC_tempApi)
                 .then((res) => {
-                    setUser(res.data);
+                    setCC(res.data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         };
 
-        getUsers();
-    }, [ShowUser_tempApi]);
+        getCCs();
+    }, [ShowCC_tempApi]);
 
-    if (user.length < 0) {
+    if (_com.length < 0) {
         return <h1>no comment found</h1>;
     } else {
         return (
@@ -80,7 +65,7 @@ const ShowUser_temp = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {user?.map((item, i) => {
+                        {_com?.map((item, i) => {
                             const idProp = {
                                 id: item.id,
                             };
@@ -104,7 +89,7 @@ const ShowUser_temp = () => {
                                             ></i>
                                         </Link>
                                         {/* <Link
-                                            to={`${hanlder["comment"]["link"]}${item.id}`}
+                                            to={`${handler["comment"]["link"]}${item.id}`}
                                         >
                                             <i
                                                 className="fa fa-eye"
@@ -131,8 +116,8 @@ const ShowUser_temp = () => {
                                         >
                                             <div className="modal-dialog">
                                                 <div className="modal-content">
-                                                    {hanlder["unblock"](
-                                                        hanlder["edit"][
+                                                    {handler["unblock"](
+                                                        handler["edit"][
                                                             "unblock"
                                                         ],
                                                         idProp
@@ -151,4 +136,4 @@ const ShowUser_temp = () => {
     }
 };
 
-export default ShowUser_temp;
+export default ShowCC_temp;

@@ -1,11 +1,8 @@
 import React from "react";
-import List from "../Comment/List";
+import URLhdl from "../Common/Handler";
 const Home = () => {
-    return (
-        <div>
-            <List />
-        </div>
-    );
+    const handler = URLhdl();
+    return <div>{handler["list"]["route"]}</div>;
 };
 
 export default Home;

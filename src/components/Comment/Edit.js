@@ -5,61 +5,46 @@ import Loader from "../Common/Loader";
 import Api from "../Common/Api";
 import "./Comment.css";
 // import URLhdl from "../Common/Handler";
-const EditUser = ({ id }) => {
-    // const hanlder = URLhdl();
-    const [user, setUser] = useState([]);
+const EditCC = ({ id }) => {
+    // const handler = URLhdl();
+    const [_com, setCC] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     // const { id } = useParams();
     // const navigate = useNavigate();
-    const getUserApi = Api();
-
-    // const getUser = () => {
-    //     axios
-    //         .get(getUserApi.concat("/") + id)
-    //         .then((item) => {
-    //             setUser(item.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getUser();
-    // }, []);
+    const getCCApi = Api();
 
     useEffect(() => {
-        const getUser = () => {
+        const getCC = () => {
             axios
-                .get(getUserApi.concat("/") + id)
+                .get(getCCApi.concat("/") + id)
                 .then((item) => {
-                    setUser(item.data);
+                    setCC(item.data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         };
 
-        getUser();
-    }, [getUserApi, id]);
+        getCC();
+    }, [getCCApi, id]);
 
     const handelInput = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
         console.log(name, value);
-        setUser({ ...user, [name]: value });
+        setCC({ ..._com, [name]: value });
     };
 
     const handelSubmit = (e) => {
         e.preventDefault();
 
-        fetch(getUserApi.concat("/") + id, {
+        fetch(getCCApi.concat("/") + id, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify(_com),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -69,7 +54,7 @@ const EditUser = ({ id }) => {
             })
             .then((data) => {
                 setIsLoading(true);
-                // navigate(hanlder["list"]["link"]);
+                // navigate(handler["list"]["link"]);
                 window.location.replace("/");
             })
             .catch((error) => {
@@ -79,7 +64,7 @@ const EditUser = ({ id }) => {
     };
 
     return (
-        <div className="user-form">
+        <div className="_com-form">
             <div className="heading">
                 {isLoading && <Loader />}
                 {error && <p>Error: {error}</p>}
@@ -95,7 +80,7 @@ const EditUser = ({ id }) => {
                         className="form-control"
                         id="userID"
                         name="userID"
-                        value={user.userID || ""}
+                        value={_com.userID || ""}
                         onChange={handelInput}
                     />
                 </div>
@@ -108,7 +93,7 @@ const EditUser = ({ id }) => {
                         className="form-control"
                         id="title"
                         name="title"
-                        value={user.title || ""}
+                        value={_com.title || ""}
                         onChange={handelInput}
                     />
                 </div>
@@ -121,7 +106,7 @@ const EditUser = ({ id }) => {
                         className="form-control"
                         id="body"
                         name="body"
-                        value={user.body || ""}
+                        value={_com.body || ""}
                         onChange={handelInput}
                     />
                 </div>
@@ -132,4 +117,4 @@ const EditUser = ({ id }) => {
         </div>
     );
 };
-export default EditUser;
+export default EditCC;

@@ -3,66 +3,51 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Comment.css";
 import Api from "../Common/Api";
-const EditUser = () => {
-    const [user, setUser] = useState([]);
+const EditCC = () => {
+    const [_com, setCC] = useState([]);
     const { id } = useParams();
-    const getUserApi = Api();
-
-    // const getUser = () => {
-    //     axios
-    //         .get(getUserApi.concat("/") + id)
-    //         .then((item) => {
-    //             setUser(item.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getUser();
-    // }, []);
+    const getCCApi = Api();
 
     useEffect(() => {
-        const getUser = () => {
+        const getCC = () => {
             axios
-                .get(getUserApi.concat("/") + id)
+                .get(getCCApi.concat("/") + id)
                 .then((item) => {
-                    setUser(item.data);
+                    setCC(item.data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         };
 
-        getUser();
-    }, [getUserApi, id]);
+        getCC();
+    }, [getCCApi, id]);
 
     return (
-        <div className="user mt-5">
+        <div className="_com mt-5">
             <table className="table table-bordered">
                 <thead>
                     <tr>
-                        <th className="showLeft">#{user.id}</th>
+                        <th className="showLeft">#{_com.id}</th>
                         <th className="showRight">Info</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>User</td>
-                        <td>{user.userID}</td>
+                        <td>{_com.userID}</td>
                     </tr>
                     <tr>
                         <td>Title</td>
-                        <td>{user.title}</td>
+                        <td>{_com.title}</td>
                     </tr>
                     <tr>
                         <td>Comment</td>
-                        <td>{user.body}</td>
+                        <td>{_com.body}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     );
 };
-export default EditUser;
+export default EditCC;
