@@ -61,7 +61,7 @@ const EditCC = ({ id }) => {
         const { name, value } = e.target;
         console.log(name, value);
         setCC({ ..._com, [name]: value });
-        handleSubmit();
+        handleSubmit(e);
     };
 
     return (
