@@ -29,14 +29,6 @@ const EditCC = ({ id }) => {
         getCC();
     }, [getCCApi, id]);
 
-    const handleInput = (e) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        console.log(name, value);
-        setCC({ ..._com, [name]: value });
-        handleSubmit;
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -62,6 +54,14 @@ const EditCC = ({ id }) => {
                 setError(error.message);
                 setIsLoading(false);
             });
+    };
+
+    const handleInput = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+        console.log(name, value);
+        setCC({ ..._com, [name]: value });
+        handleSubmit;
     };
 
     return (
