@@ -73,18 +73,14 @@ const ShowCC_temp = () => {
                                     <td>{item.title}</td>
                                     <td>{item.body}</td>
                                     <td>
-                                        {/* <Link
-                                            to="#"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                                "#editModal" + item.id
-                                            }
+                                        <Link
+                                            to={`${handler["edit"]["link"]}${item.id}`}
                                         >
                                             <i
                                                 className="fa fa-pencil"
                                                 aria-hidden="true"
                                             ></i>
-                                        </Link> */}
+                                        </Link>
                                         <Link
                                             to={`${handler["comment"]["link"]}${item.id}`}
                                         >
