@@ -72,7 +72,6 @@ const EditCC = ({ id }) => {
                 <p>Edit Form</p>
             </div>
             <form>
-                {/*  onSubmit={handleSubmit} */}
                 <div className="mb-3">
                     <label htmlFor="userID" className="form-label">
                         User
