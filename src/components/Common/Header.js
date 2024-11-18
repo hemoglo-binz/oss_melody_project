@@ -40,7 +40,7 @@ export default function Header() {
                                     className="nav-link"
                                     to={handler["list"]["link"]}
                                 >
-                                    Reload
+                                    List
                                 </Link>
                             </li>
                         </ul>
