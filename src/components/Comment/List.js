@@ -66,9 +66,6 @@ const ShowCC_temp = () => {
                     </thead>
                     <tbody>
                         {_com?.map((item, i) => {
-                            const idProp = {
-                                id: item.id,
-                            };
                             return (
                                 <tr key={i + 1}>
                                     <td>{i + 1}</td>
