@@ -3,7 +3,7 @@ import List from "../Comment/List";
 import Edit from "../Comment/Edit";
 import Comment from "../Comment/Comment";
 import Home from "../Layout/Home";
-import NoPage from "../Layout/NoPage";
+import NoPage from "../Common/NoPage";
 
 const unblocker = (Block, prop) => {
     return <Block {...prop} />;
