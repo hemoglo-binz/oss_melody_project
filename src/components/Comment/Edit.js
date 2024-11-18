@@ -29,14 +29,15 @@ const EditCC = ({ id }) => {
         getCC();
     }, [getCCApi, id]);
 
-    const handelInput = (e) => {
+    const handleInput = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
         console.log(name, value);
         setCC({ ..._com, [name]: value });
+        handleSubmit;
     };
 
-    const handelSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         fetch(getCCApi.concat("/") + id, {
@@ -53,9 +54,9 @@ const EditCC = ({ id }) => {
                 return response.json();
             })
             .then((data) => {
-                setIsLoading(true);
+                // setIsLoading(true);
                 // navigate(handler["list"]["link"]);
-                window.location.replace("/");
+                // window.location.replace("/");
             })
             .catch((error) => {
                 setError(error.message);
@@ -70,7 +71,8 @@ const EditCC = ({ id }) => {
                 {error && <p>Error: {error}</p>}
                 <p>Edit Form</p>
             </div>
-            <form onSubmit={handelSubmit}>
+            <form>
+                {/*  onSubmit={handleSubmit} */}
                 <div className="mb-3">
                     <label htmlFor="userID" className="form-label">
                         User
@@ -81,7 +83,7 @@ const EditCC = ({ id }) => {
                         id="userID"
                         name="userID"
                         value={_com.userID || ""}
-                        onChange={handelInput}
+                        onChange={handleInput}
                     />
                 </div>
                 <div className="mb-3 mt-3">
@@ -94,7 +96,7 @@ const EditCC = ({ id }) => {
                         id="title"
                         name="title"
                         value={_com.title || ""}
-                        onChange={handelInput}
+                        onChange={handleInput}
                     />
                 </div>
                 <div className="mb-3">
@@ -107,12 +109,12 @@ const EditCC = ({ id }) => {
                         id="body"
                         name="body"
                         value={_com.body || ""}
-                        onChange={handelInput}
+                        onChange={handleInput}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary submit-btn">
+                {/* <button type="submit" className="btn btn-primary submit-btn">
                     EDIT
-                </button>
+                </button> */}
             </form>
         </div>
     );

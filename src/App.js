@@ -30,6 +30,10 @@ function App() {
                             path={handler["list"]["link"]}
                             element={handler["list"]["route"]}
                         />
+                        <Route
+                            path={handler["nopage"]["link"]}
+                            element={handler["nopage"]["route"]}
+                        />
                     </Routes>
                 </div>
             </header>

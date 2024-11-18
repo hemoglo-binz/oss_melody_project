@@ -3,6 +3,7 @@ import List from "../Comment/List";
 import Edit from "../Comment/Edit";
 import Comment from "../Comment/Comment";
 import Home from "../Layout/Home";
+import NoPage from "../Layout/NoPage";
 
 const unblocker = (Block, prop) => {
     return <Block {...prop} />;
@@ -10,9 +11,10 @@ const unblocker = (Block, prop) => {
 
 const URLs = {
     home: { link: "/", route: <Home />, unblock: Home },
-    edit: { link: "/edit/", route: <Edit />, unblock: Edit },
+    nopage: { link: "*", route: <NoPage />, unblock: NoPage },
+    edit: { link: "/update/", route: <Edit />, unblock: Edit },
     comment: {
-        link: "/comment/",
+        link: "/detail/",
         route: <Comment />,
         unblock: Comment,
     },

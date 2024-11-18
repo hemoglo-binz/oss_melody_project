@@ -13,7 +13,7 @@ const ShowCC_temp = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handelDelete = async (id) => {
+    const handleDelete = async (id) => {
         console.log("id : -", id);
         setIsLoading(true);
         try {
@@ -76,7 +76,7 @@ const ShowCC_temp = () => {
                                     <td>{item.title}</td>
                                     <td>{item.body}</td>
                                     <td>
-                                        <Link
+                                        {/* <Link
                                             to="#"
                                             data-bs-toggle="modal"
                                             data-bs-target={
@@ -87,25 +87,25 @@ const ShowCC_temp = () => {
                                                 className="fa fa-pencil"
                                                 aria-hidden="true"
                                             ></i>
-                                        </Link>
-                                        {/* <Link
+                                        </Link> */}
+                                        <Link
                                             to={`${handler["comment"]["link"]}${item.id}`}
                                         >
                                             <i
                                                 className="fa fa-eye"
                                                 aria-hidden="true"
                                             ></i>
-                                        </Link> */}
+                                        </Link>
 
                                         <i
                                             className="fa fa-trash-o"
                                             aria-hidden="true"
                                             onClick={() =>
-                                                handelDelete(item.id)
+                                                handleDelete(item.id)
                                             }
                                         ></i>
 
-                                        <div
+                                        {/* <div
                                             className="modal fade"
                                             id={"editModal" + item.id}
                                             tabIndex="-1"
@@ -124,7 +124,7 @@ const ShowCC_temp = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </td>
                                 </tr>
                             );
