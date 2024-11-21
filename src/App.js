@@ -11,10 +11,6 @@ function App() {
                     <Header />
                     <Routes>
                         <Route
-                            path={handler["home"]["link"]}
-                            element={handler["home"]["route"]}
-                        />
-                        <Route
                             path={handler["edit"]["link"] + ":id"}
                             element={handler["edit"]["route"]}
                         />
@@ -29,6 +25,10 @@ function App() {
                         <Route
                             path={handler["list"]["link"]}
                             element={handler["list"]["route"]}
+                        />
+                        <Route
+                            path={handler["home"]["link"]}
+                            element={handler["home"]["route"]}
                         />
                         <Route
                             path={handler["nopage"]["link"]}
