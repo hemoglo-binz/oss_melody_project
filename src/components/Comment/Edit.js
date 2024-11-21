@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import useParams from "react-router-dom";
 // import { useParams, useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import Api from "../Common/Api";
