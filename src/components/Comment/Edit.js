@@ -5,12 +5,12 @@ import Loader from "../Common/Loader";
 import Api from "../Common/Api";
 import "./Comment.css";
 // import URLhdl from "../Common/Handler";
-const EditCC = ({ id }) => {
+const EditCC = () => {
     // const handler = URLhdl();
     const [_com, setCC] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    // const { id } = useParams();
+    const { id } = useParams();
     // const navigate = useNavigate();
     const getCCApi = Api();
 
