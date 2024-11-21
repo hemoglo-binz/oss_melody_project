@@ -18,8 +18,8 @@ const URLs = {
         route: <Comment />,
         unblock: Comment,
     },
-    create: { link: "/create/", route: <Add />, unblock: Add },
-    list: { link: "/list/", route: <List />, unblock: List },
+    create: { link: "/create", route: <Add />, unblock: Add },
+    list: { link: "/list", route: <List />, unblock: List },
     unblock: unblocker,
 };
 
