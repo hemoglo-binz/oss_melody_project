@@ -58,7 +58,8 @@
     width: 90px;
 }
 
-.form_add .form_edit {
+.form_add,
+.form_edit {
     width: 80%;
     margin-left: 10%;
 }
