@@ -118,7 +118,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[0] = e)}
                         />
-                        {isVaildUID ? (
+                        {!isVaildUID ? (
                             <span>Please check your User ID.</span>
                         ) : null}
                     </div>
@@ -135,7 +135,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[1] = e)}
                         />
-                        {isVaildTitle ? (
+                        {!isVaildTitle ? (
                             <span>Please check your Title.</span>
                         ) : null}
                     </div>
@@ -152,7 +152,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[2] = e)}
                         />
-                        {isVaildBody ? (
+                        {!isVaildBody ? (
                             <span>Please check your Comment.</span>
                         ) : null}
                     </div>
