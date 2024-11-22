@@ -19,8 +19,7 @@ const CreateCC_temp = () => {
     const inputRf = useRef([]);
     const { id, userID, title, body } = _com;
 
-    id = 0;
-
+    const isVaildID = id.length >= 1;
     const isVaildUID = userID.length >= 1;
     const isVaildTitle = title.length >= 1;
     const isVaildBody = body.length >= 1;
@@ -36,6 +35,8 @@ const CreateCC_temp = () => {
         event.preventDefault();
         // console.log(_com);
         var isOk = 1;
+        if (!isVaildID) {
+        }
         if (!isVaildBody) {
             isOk = 0;
             inputRf.current[2].focus();
