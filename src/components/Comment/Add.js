@@ -16,6 +16,7 @@ const CreateCC_temp = () => {
         title: "",
         body: "",
     });
+    const { id, userID, title, body } = _com;
     const inputRf = useRef([]);
 
     const isVaild = (t) => {
