@@ -10,3 +10,7 @@ img {
 .actions {
     min-width: 120px;
 }
+
+.form_edit {
+    width: 80%;
+}

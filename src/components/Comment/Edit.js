@@ -72,7 +72,7 @@ const EditCC = () => {
                 {error && <p>Error: {error}</p>}
                 <p>Edit Form</p>
             </div>
-            <form>
+            <form className="form_edit">
                 <div className="mb-3">
                     <label htmlFor="userID" className="form-label">
                         User
