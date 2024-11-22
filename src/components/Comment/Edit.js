@@ -9,6 +9,7 @@ import "./Comment.css";
 const EditCC = () => {
     // const handler = URLhdl();
     const { param } = useParams();
+    console.log(param);
     const [_com, setCC] = useState({
         id: param,
         userID: "",
