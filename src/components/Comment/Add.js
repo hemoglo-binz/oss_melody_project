@@ -20,13 +20,13 @@ const CreateCC_temp = () => {
     const handleInput = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
-        console.log(name, value);
+        // console.log(name, value);
         setCC({ ..._com, [name]: value });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(_com);
+        // console.log(_com);
         try {
             setIsLoading(true);
 
@@ -39,7 +39,7 @@ const CreateCC_temp = () => {
             });
 
             if (response2.ok) {
-                console.log("Form submitted successfully!");
+                // console.log("Form submitted successfully!");
                 setCC({
                     id: "",
                     userID: "",
@@ -49,7 +49,7 @@ const CreateCC_temp = () => {
                 // navigate(handler["list"]["link"]);
                 window.location.replace("/");
             } else {
-                console.error("Form submission failed!");
+                // console.error("Form submission failed!");
             }
         } catch (error) {
             setError(error.message);

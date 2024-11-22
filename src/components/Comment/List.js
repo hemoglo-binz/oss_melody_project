@@ -14,7 +14,7 @@ const ShowCC_temp = () => {
     const [error, setError] = useState(null);
 
     const handleDelete = async (id) => {
-        console.log("id : -", id);
+        // console.log("id : -", id);
         setIsLoading(true);
         try {
             const response = await fetch(ShowCC_tempApi.concat("/") + id, {

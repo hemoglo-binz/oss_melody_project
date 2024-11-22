@@ -60,7 +60,7 @@ const EditCC = () => {
     const handleInput = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-        console.log(name, value);
+        // console.log(name, value);
         setCC({ ..._com, [name]: value });
         handleSubmit(e);
     };
