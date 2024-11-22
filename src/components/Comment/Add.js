@@ -24,6 +24,8 @@ const CreateCC_temp = () => {
     const isVaildTitle = title.length >= 1;
     const isVaildBody = body.length >= 1;
 
+    var isSubmit = false;
+
     const handleInput = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
@@ -34,6 +36,7 @@ const CreateCC_temp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // console.log(_com);
+        isSubmit = true;
         var isOk = 1;
         if (!isVaildID) {
         }
@@ -118,7 +121,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[0] = e)}
                         />
-                        {!isVaildUID ? (
+                        {isSubmit && !isVaildUID ? (
                             <span>Please check your User ID.</span>
                         ) : null}
                     </div>
@@ -135,7 +138,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[1] = e)}
                         />
-                        {!isVaildTitle ? (
+                        {isSubmit && !isVaildTitle ? (
                             <span>Please check your Title.</span>
                         ) : null}
                     </div>
@@ -152,7 +155,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[2] = e)}
                         />
-                        {!isVaildBody ? (
+                        {isSubmit && !isVaildBody ? (
                             <span>Please check your Comment.</span>
                         ) : null}
                     </div>
