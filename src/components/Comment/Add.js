@@ -27,9 +27,11 @@ const CreateCC_temp = () => {
     var isChanged = false;
 
     const handleInput = (event) => {
-        isChanged = true;
         event.preventDefault();
         const { name, value } = event.target;
+        if (value) {
+            isChanged = true;
+        }
         // console.log(name, value);
         setCC({ ..._com, [name]: value });
     };
@@ -87,21 +89,13 @@ const CreateCC_temp = () => {
 
     return (
         <>
-            <div className="modal-header">
-                <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
-            </div>
             <div className="_com-form">
                 <div className="heading">
                     {isLoading && <Loader />}
                     {error && <p>Error: {error}</p>}
                     <p>Add Comment</p>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form className="form_add" onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="userID" className="form-label">
                             User ID
