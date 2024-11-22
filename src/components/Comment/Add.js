@@ -16,7 +16,6 @@ const CreateCC_temp = () => {
         title: "",
         body: "",
     });
-    const { userID, title, body } = _com;
     const inputRf = useRef([]);
 
     const isVaild = (t) => {
@@ -35,17 +34,17 @@ const CreateCC_temp = () => {
         event.preventDefault();
         // console.log(_com);
         var isOk = 1;
-        if (!isVaild(userID)) {
+        if (!isVaild(_com.body)) {
             isOk = 0;
-            inputRf.current[0].focus();
+            inputRf.current[2].focus();
         }
-        if (!isVaild(title)) {
+        if (!isVaild(_com.title)) {
             isOk = 0;
             inputRf.current[1].focus();
         }
-        if (!isVaild(body)) {
+        if (!isVaild(_com.userID)) {
             isOk = 0;
-            inputRf.current[2].focus();
+            inputRf.current[0].focus();
         }
         if (!isOk) {
             return 0;
@@ -104,7 +103,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[0] = e)}
                         />
-                        {!isVaild(userID) ? (
+                        {!isVaild(_com.userID) ? (
                             <span>Please check your User ID.</span>
                         ) : null}
                     </div>
@@ -121,7 +120,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[1] = e)}
                         />
-                        {!isVaild(userID) ? (
+                        {!isVaild(_com.title) ? (
                             <span>Please check your Title.</span>
                         ) : null}
                     </div>
@@ -138,7 +137,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[2] = e)}
                         />
-                        {!isVaild(userID) ? (
+                        {!isVaild(_com.body) ? (
                             <span>Please check your Comment.</span>
                         ) : null}
                     </div>
