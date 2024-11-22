@@ -109,9 +109,9 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[0] = e)}
                         />
-                        {isChanged && !isVaild(userID) ? null : (
+                        {isChanged && !isVaild(userID) ? (
                             <span>Please check your User ID.</span>
-                        )}
+                        ) : null}
                     </div>
                     <div className="mb-3 mt-3">
                         <label htmlFor="title" className="form-label">
@@ -126,9 +126,9 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[1] = e)}
                         />
-                        {isChanged && !isVaild(userID) ? null : (
+                        {isChanged && !isVaild(userID) ? (
                             <span>Please check your Title.</span>
-                        )}
+                        ) : null}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="body" className="form-label">
@@ -143,9 +143,9 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[2] = e)}
                         />
-                        {isChanged && !isVaild(userID) ? null : (
+                        {isChanged && !isVaild(userID) ? (
                             <span>Please check your Comment.</span>
-                        )}
+                        ) : null}
                     </div>
                     <button
                         type="submit"
