@@ -15,6 +15,14 @@ const EditCC = () => {
     // const navigate = useNavigate();
     const getCCApi = Api();
 
+    const inputRf = useRef([]);
+    const { temp_id, userID, title, body } = _com;
+
+    const isVaildID = temp_id.length >= 1;
+    const isVaildUID = userID.length >= 1;
+    const isVaildTitle = title.length >= 1;
+    const isVaildBody = body.length >= 1;
+
     useEffect(() => {
         const getCC = () => {
             axios
@@ -32,6 +40,37 @@ const EditCC = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        var isOk = 1;
+        if (!isVaildID) {
+        }
+        if (!isVaildBody) {
+            isOk = 0;
+            inputRf.current[2].focus();
+            setCC({
+                ..._com,
+                body: "",
+            });
+        }
+        if (!isVaildTitle) {
+            isOk = 0;
+            inputRf.current[1].focus();
+            setCC({
+                ..._com,
+                title: "",
+            });
+        }
+        if (!isVaildUID) {
+            isOk = 0;
+            inputRf.current[0].focus();
+            setCC({
+                ..._com,
+                userID: "",
+            });
+        }
+        if (!isOk) {
+            return 0;
+        }
 
         fetch(getCCApi.concat("/") + id, {
             method: "PUT",
@@ -75,7 +114,7 @@ const EditCC = () => {
             <form className="form_edit">
                 <div className="mb-3">
                     <label htmlFor="userID" className="form-label">
-                        User
+                        User ID
                     </label>
                     <input
                         type="text"
@@ -84,7 +123,11 @@ const EditCC = () => {
                         name="userID"
                         value={_com.userID || ""}
                         onChange={handleInput}
+                        ref={(e) => (inputRf.current[0] = e)}
                     />
+                    {!isVaildUID ? (
+                        <span>Please check your User ID.</span>
+                    ) : null}
                 </div>
                 <div className="mb-3 mt-3">
                     <label htmlFor="title" className="form-label">
@@ -97,7 +140,11 @@ const EditCC = () => {
                         name="title"
                         value={_com.title || ""}
                         onChange={handleInput}
+                        ref={(e) => (inputRf.current[1] = e)}
                     />
+                    {!isVaildTitle ? (
+                        <span>Please check your User ID.</span>
+                    ) : null}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="body" className="form-label">
@@ -110,7 +157,11 @@ const EditCC = () => {
                         name="body"
                         value={_com.body || ""}
                         onChange={handleInput}
+                        ref={(e) => (inputRf.current[2] = e)}
                     />
+                    {!isVaildBody ? (
+                        <span>Please check your User ID.</span>
+                    ) : null}
                 </div>
                 {/* <button type="submit" className="btn btn-primary submit-btn">
                     EDIT

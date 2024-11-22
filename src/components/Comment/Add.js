@@ -39,7 +39,6 @@ const CreateCC_temp = () => {
         event.preventDefault();
         // console.log(_com);
         setSubmit(true);
-        console.log(isSubmit);
         var isOk = 1;
         if (!isVaildID) {
         }
