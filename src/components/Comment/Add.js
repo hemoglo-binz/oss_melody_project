@@ -24,14 +24,9 @@ const CreateCC_temp = () => {
         return false;
     };
 
-    var isChanged = false;
-
     const handleInput = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
-        if (value) {
-            isChanged = true;
-        }
         // console.log(name, value);
         setCC({ ..._com, [name]: value });
     };
@@ -109,7 +104,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[0] = e)}
                         />
-                        {isChanged && !isVaild(userID) ? (
+                        {!isVaild(userID) ? (
                             <span>Please check your User ID.</span>
                         ) : null}
                     </div>
@@ -126,7 +121,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[1] = e)}
                         />
-                        {isChanged && !isVaild(userID) ? (
+                        {!isVaild(userID) ? (
                             <span>Please check your Title.</span>
                         ) : null}
                     </div>
@@ -143,7 +138,7 @@ const CreateCC_temp = () => {
                             onChange={handleInput}
                             ref={(e) => (inputRf.current[2] = e)}
                         />
-                        {isChanged && !isVaild(userID) ? (
+                        {!isVaild(userID) ? (
                             <span>Please check your Comment.</span>
                         ) : null}
                     </div>
