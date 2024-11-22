@@ -37,14 +37,26 @@ const CreateCC_temp = () => {
         if (!isVaild(_com.body)) {
             isOk = 0;
             inputRf.current[2].focus();
+            setCC({
+                ..._com,
+                body: "",
+            });
         }
         if (!isVaild(_com.title)) {
             isOk = 0;
             inputRf.current[1].focus();
+            setCC({
+                ..._com,
+                title: "",
+            });
         }
         if (!isVaild(_com.userID)) {
             isOk = 0;
             inputRf.current[0].focus();
+            setCC({
+                ..._com,
+                userID: "",
+            });
         }
         if (!isOk) {
             return 0;
