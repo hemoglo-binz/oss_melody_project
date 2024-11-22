@@ -16,7 +16,7 @@ const CreateCC_temp = () => {
         title: "",
         body: "",
     });
-    const { id, userID, title, body } = _com;
+    const { userID, title, body } = _com;
     const inputRf = useRef([]);
 
     const isVaild = (t) => {
@@ -49,6 +49,9 @@ const CreateCC_temp = () => {
         if (!isVaild(body)) {
             isOk = 0;
             inputRf.current[2].focus();
+        }
+        if (!isOk) {
+            return 0;
         }
 
         try {
