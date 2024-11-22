@@ -8,7 +8,12 @@ import "./Comment.css";
 // import URLhdl from "../Common/Handler";
 const EditCC = () => {
     // const handler = URLhdl();
-    const [_com, setCC] = useState([]);
+    const [_com, setCC] = useState({
+        id: "",
+        userID: "",
+        title: "",
+        body: "",
+    });
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
