@@ -28,9 +28,7 @@ export default function Header() {
                             <li className="nav-item">
                                 <Link
                                     className="nav-link"
-                                    to="#"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#addModal"
+                                    to={handler["create"]["link"]}
                                 >
                                     Add Comment
                                 </Link>
@@ -47,7 +45,7 @@ export default function Header() {
                     </div>
                 </div>
             </nav>
-            <div
+            {/* <div
                 className="modal fade"
                 id="addModal"
                 tabIndex="-1"
@@ -59,7 +57,7 @@ export default function Header() {
                         {handler["create"]["route"]}
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
