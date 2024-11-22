@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import Api from "../Common/Api";
@@ -16,8 +16,17 @@ const CreateCC_temp = () => {
         title: "",
         body: "",
     });
+    const inputRf = useRef([]);
+
+    const isVaild = (t) => {
+        if (t.length >= 1) return true;
+        return false;
+    };
+
+    var isChanged = false;
 
     const handleInput = (event) => {
+        isChanged = true;
         event.preventDefault();
         const { name, value } = event.target;
         // console.log(name, value);
@@ -27,6 +36,20 @@ const CreateCC_temp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // console.log(_com);
+        var isOk = 1;
+        if (!isVaild(userID)) {
+            isOk = 0;
+            inputRf.current[0].focus();
+        }
+        if (!isVaild(title)) {
+            isOk = 0;
+            inputRf.current[1].focus();
+        }
+        if (!isVaild(body)) {
+            isOk = 0;
+            inputRf.current[2].focus();
+        }
+
         try {
             setIsLoading(true);
 
@@ -77,7 +100,7 @@ const CreateCC_temp = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="userID" className="form-label">
-                            User
+                            User ID
                         </label>
                         <input
                             type="text"
@@ -86,7 +109,11 @@ const CreateCC_temp = () => {
                             name="userID"
                             value={_com.userID}
                             onChange={handleInput}
+                            ref={(e) => (inputRf.current[0] = e)}
                         />
+                        {isChanged && !isVaild(userID) ? null : (
+                            <span>Please check your User ID.</span>
+                        )}
                     </div>
                     <div className="mb-3 mt-3">
                         <label htmlFor="title" className="form-label">
@@ -99,7 +126,11 @@ const CreateCC_temp = () => {
                             name="title"
                             value={_com.title}
                             onChange={handleInput}
+                            ref={(e) => (inputRf.current[1] = e)}
                         />
+                        {isChanged && !isVaild(userID) ? null : (
+                            <span>Please check your Title.</span>
+                        )}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="body" className="form-label">
@@ -112,7 +143,11 @@ const CreateCC_temp = () => {
                             name="body"
                             value={_com.body}
                             onChange={handleInput}
+                            ref={(e) => (inputRf.current[2] = e)}
                         />
+                        {isChanged && !isVaild(userID) ? null : (
+                            <span>Please check your Comment.</span>
+                        )}
                     </div>
                     <button
                         type="submit"
