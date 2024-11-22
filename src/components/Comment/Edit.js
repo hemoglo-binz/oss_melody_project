@@ -108,7 +108,7 @@ const EditCC = () => {
         const { name, value } = e.target;
         // console.log(name, value);
         setCC({ ..._com, [name]: value });
-        handleSubmit(e);
+        // handleSubmit(e);
     };
 
     return (
@@ -130,6 +130,7 @@ const EditCC = () => {
                         name="userID"
                         value={_com.userID || ""}
                         onChange={handleInput}
+                        onInput={handleSubmit}
                         ref={(e) => (inputRf.current[0] = e)}
                     />
                     {!isVaildUID ? (
@@ -147,6 +148,7 @@ const EditCC = () => {
                         name="title"
                         value={_com.title || ""}
                         onChange={handleInput}
+                        onInput={handleSubmit}
                         ref={(e) => (inputRf.current[1] = e)}
                     />
                     {!isVaildTitle ? (
@@ -164,6 +166,7 @@ const EditCC = () => {
                         name="body"
                         value={_com.body || ""}
                         onChange={handleInput}
+                        onInput={handleSubmit}
                         ref={(e) => (inputRf.current[2] = e)}
                     />
                     {!isVaildBody ? (
