@@ -24,9 +24,9 @@ const CreateCC_temp = () => {
     const isVaildTitle = title.length >= 1;
     const isVaildBody = body.length >= 1;
 
-    var isSubmit = false;
+    const [isSubmit, setSubmit] = useState();
 
-    const isSubmit_ = isSubmit;
+    const isSubmit_ = isSubmit ? true : false;
 
     const handleInput = (event) => {
         event.preventDefault();
@@ -38,7 +38,7 @@ const CreateCC_temp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // console.log(_com);
-        isSubmit = true;
+        setSubmit(true);
         console.log(isSubmit);
         var isOk = 1;
         if (!isVaildID) {
