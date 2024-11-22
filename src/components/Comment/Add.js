@@ -17,7 +17,7 @@ const CreateCC_temp = () => {
         body: "",
     });
     const inputRf = useRef([]);
-    const { id, userID, title, body } = com;
+    const { id, userID, title, body } = _com;
 
     id = 0;
 
@@ -36,7 +36,7 @@ const CreateCC_temp = () => {
         event.preventDefault();
         // console.log(_com);
         var isOk = 1;
-        if (!isVaild(body)) {
+        if (!isVaildBody) {
             isOk = 0;
             inputRf.current[2].focus();
             setCC({
@@ -44,7 +44,7 @@ const CreateCC_temp = () => {
                 body: "",
             });
         }
-        if (!isVaild(title)) {
+        if (!isVaildTitle) {
             isOk = 0;
             inputRf.current[1].focus();
             setCC({
@@ -52,7 +52,7 @@ const CreateCC_temp = () => {
                 title: "",
             });
         }
-        if (!isVaild(userID)) {
+        if (!isVaildUID) {
             isOk = 0;
             inputRf.current[0].focus();
             setCC({
