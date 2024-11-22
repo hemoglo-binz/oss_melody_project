@@ -9,21 +9,20 @@ import "./Comment.css";
 const EditCC = () => {
     // const handler = URLhdl();
     const [_com, setCC] = useState({
-        id: "",
+        id: useParams(),
         userID: "",
         title: "",
         body: "",
     });
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { id } = useParams();
     // const navigate = useNavigate();
     const getCCApi = Api();
 
     const inputRf = useRef([]);
-    const { temp_id, userID, title, body } = _com;
+    const { id, userID, title, body } = _com;
 
-    const isVaildID = temp_id.length >= 1;
+    const isVaildID = id.length >= 1;
     const isVaildUID = userID.length >= 1;
     const isVaildTitle = title.length >= 1;
     const isVaildBody = body.length >= 1;
