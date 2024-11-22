@@ -11,7 +11,7 @@ function App() {
                     <Header />
                     <Routes>
                         <Route
-                            path={handler["edit"]["link"] + ":id"}
+                            path={handler["edit"]["link"] + ":idp"}
                             element={handler["edit"]["route"]}
                         />
                         <Route

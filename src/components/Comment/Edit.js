@@ -8,10 +8,10 @@ import "./Comment.css";
 // import URLhdl from "../Common/Handler";
 const EditCC = () => {
     // const handler = URLhdl();
-    const { param } = useParams();
-    console.log(param);
+    const { idp } = useParams();
+    console.log(idp);
     const [_com, setCC] = useState({
-        id: param,
+        id: idp,
         userID: "",
         title: "",
         body: "",
@@ -22,6 +22,7 @@ const EditCC = () => {
     const getCCApi = Api();
 
     const inputRf = useRef([]);
+
     const { id, userID, title, body } = _com;
 
     const isVaildID = id.length >= 1;
