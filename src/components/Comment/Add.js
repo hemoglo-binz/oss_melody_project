@@ -150,7 +150,6 @@ const CreateCC_temp = () => {
                     <button
                         type="submit"
                         className="btn btn-primary submit-btn"
-                        data-bs-dismiss="modal"
                     >
                         Submit
                     </button>
