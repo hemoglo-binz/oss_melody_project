@@ -13,32 +13,24 @@ export default function Header() {
                         className="navbar-brand"
                         href="#"
                     >
-                        <span className="navbar-text">Comments</span>
+                        <span className="navbar-text">Melody</span>
                     </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#mynavbar"
+                        data-bs-target="#navbr"
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="mynavbar">
+                    <div className="collapse navbar-collapse" id="navbr">
                         <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <Link
-                                    className="nav-link"
-                                    to={handler["create"]["link"]}
-                                >
-                                    Add Comment
-                                </Link>
-                            </li>
                             <li className="nav-item">
                                 <Link
                                     className="nav-link"
                                     to={handler["list"]["link"]}
                                 >
-                                    List
+                                    Chart
                                 </Link>
                             </li>
                         </ul>

@@ -15,16 +15,16 @@ function App() {
                             element={handler["edit"]["route"]}
                         />
                         <Route
-                            path={handler["comment"]["link"] + ":id"}
-                            element={handler["comment"]["route"]}
-                        />
-                        <Route
                             path={handler["create"]["link"]}
                             element={handler["create"]["route"]}
                         />
                         <Route
                             path={handler["list"]["link"]}
                             element={handler["list"]["route"]}
+                        />
+                        <Route
+                            path={handler["detail"]["link"] + ":title"}
+                            element={handler["detail"]["route"]}
                         />
                         <Route
                             path={handler["home"]["link"]}

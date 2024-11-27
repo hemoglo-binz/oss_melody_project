@@ -1,7 +1,7 @@
 import Add from "../Comment/Add";
 import List from "../Comment/List";
 import Edit from "../Comment/Edit";
-import Comment from "../Comment/Comment";
+import Detail from "../Comment/Detail";
 import Home from "../Layout/Home";
 import NoPage from "../Common/NoPage";
 
@@ -12,14 +12,10 @@ const unblocker = (Block, prop) => {
 const URLs = {
     home: { link: "/", route: <Home />, unblock: Home },
     nopage: { link: "*", route: <NoPage />, unblock: NoPage },
-    edit: { link: "/update/", route: <Edit />, unblock: Edit },
-    comment: {
-        link: "/detail/",
-        route: <Comment />,
-        unblock: Comment,
-    },
-    create: { link: "/create", route: <Add />, unblock: Add },
-    list: { link: "/list", route: <List />, unblock: List },
+    edit: { link: "/edit/", route: <Edit />, unblock: Edit },
+    create: { link: "/write", route: <Add />, unblock: Add },
+    list: { link: "/chart", route: <List />, unblock: List },
+    detail: { link: "/detail/", route: <Detail />, unblock: Detail },
     unblock: unblocker,
 };
 
