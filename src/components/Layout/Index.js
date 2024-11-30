@@ -61,15 +61,17 @@ const ShowSong_t = () => {
                             );
                         })}
                     </div>
-                    <button
-                        style={{
-                            "margin-top": "20px",
-                            padding: "10px 20px",
-                            "font-size": "16px",
-                        }}
-                    >
-                        More
-                    </button>
+                    <Link to={handler["list"]["link"]}>
+                        <button
+                            style={{
+                                "margin-top": "20px",
+                                padding: "10px 20px",
+                                "font-size": "16px",
+                            }}
+                        >
+                            More
+                        </button>
+                    </Link>
                 </div>
             </div>
         );
