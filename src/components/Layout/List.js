@@ -13,6 +13,7 @@ const ShowSong_t = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [sort, setSort] = useState(0);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const getSongs = (sort = 0, search = "") => {
@@ -56,11 +57,15 @@ const ShowSong_t = () => {
                 });
         };
 
-        getSongs(sort);
-    }, [ShowSong_tApi, sort]);
+        getSongs(sort, search);
+    }, [ShowSong_tApi, sort, search]);
 
     const handleSort = (sortType) => {
         setSort(sortType);
+    };
+
+    const handleSearch = () => {
+        setSearch(document.getElementById("searchInput").value);
     };
 
     if (_song.length < 0) {
@@ -75,8 +80,8 @@ const ShowSong_t = () => {
                         <tr>
                             <th>
                                 Rank
-                                <button onClick={() => handleSort(1)}>↑</button>
-                                <button onClick={() => handleSort(0)}>↓</button>
+                                <button onClick={() => handleSort(0)}>↑</button>
+                                <button onClick={() => handleSort(1)}>↓</button>
                             </th>
                             <th>
                                 Title
@@ -87,6 +92,12 @@ const ShowSong_t = () => {
                                 Singer
                                 <button onClick={() => handleSort(4)}>↑</button>
                                 <button onClick={() => handleSort(5)}>↓</button>
+                                <input
+                                    id="searchInput"
+                                    type="text"
+                                    placeholder="Search by singer"
+                                />
+                                <button onClick={handleSearch}>Search</button>
                             </th>
                         </tr>
                     </thead>
