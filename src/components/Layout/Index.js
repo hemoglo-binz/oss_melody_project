@@ -33,7 +33,7 @@ const ShowSong_t = () => {
         return <h1>no song found</h1>;
     } else {
         return (
-            <div className="mt-5">
+            <div>
                 {isLoading && <Loader />}
                 {error && <p>Error: {error}</p>}
                 <div class="container">
