@@ -12,21 +12,56 @@ const ShowSong_t = () => {
     const [_song, setSong] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [sort, setSort] = useState(0);
 
     useEffect(() => {
-        const getSongs = () => {
+        const getSongs = (sort = 0, search = "") => {
             axios
                 .get(ShowSong_tApi)
                 .then((res) => {
-                    setSong(res.data);
+                    let songs = res.data;
+                    if (search !== "") {
+                        songs = songs.filter((song) =>
+                            song.title
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        );
+                    }
+                    if (sort == 1) {
+                        songs = songs.sort((a, b) => b.rank - a.rank);
+                    } else if (sort == 2) {
+                        songs = songs.sort((a, b) =>
+                            a.title.localeCompare(b.title)
+                        );
+                    } else if (sort == 3) {
+                        songs = songs.sort((a, b) =>
+                            b.title.localeCompare(a.title)
+                        );
+                    } else if (sort == 4) {
+                        songs = songs.sort((a, b) =>
+                            a.artist.localeCompare(b.artist)
+                        );
+                    } else if (sort == 5) {
+                        songs = songs.sort((a, b) =>
+                            b.artist.localeCompare(a.artist)
+                        );
+                    }
+                    if (songs.length > 20) {
+                        songs = songs.slice(0, 20);
+                    }
+                    setSong(songs);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         };
 
-        getSongs();
-    }, [ShowSong_tApi]);
+        getSongs(sort);
+    }, [ShowSong_tApi, sort]);
+
+    const handleSort = (sortType) => {
+        setSort(sortType);
+    };
 
     if (_song.length < 0) {
         return <h1>no song found</h1>;
@@ -38,9 +73,21 @@ const ShowSong_t = () => {
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th>Rank</th>
-                            <th>Title</th>
-                            <th>Singer</th>
+                            <th>
+                                Rank
+                                <button onClick={() => handleSort(1)}>↑</button>
+                                <button onClick={() => handleSort(0)}>↓</button>
+                            </th>
+                            <th>
+                                Title
+                                <button onClick={() => handleSort(2)}>↑</button>
+                                <button onClick={() => handleSort(3)}>↓</button>
+                            </th>
+                            <th>
+                                Singer
+                                <button onClick={() => handleSort(4)}>↑</button>
+                                <button onClick={() => handleSort(5)}>↓</button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
