@@ -19,7 +19,7 @@ const ShowSong_t = () => {
             axios
                 .get(ShowSong_tApi)
                 .then((res) => {
-                    setSong(res.data);
+                    setSong(res.data.slice(0, 10));
                 })
                 .catch((err) => {
                     console.log(err);
