@@ -95,7 +95,7 @@ const ShowSong_t = () => {
                                 <input
                                     id="searchInput"
                                     type="text"
-                                    placeholder="Search by singer"
+                                    placeholder="Search by Title"
                                 />
                                 <button onClick={handleSearch}>Search</button>
                             </th>
