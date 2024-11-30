@@ -1,8 +1,8 @@
 import Add from "../Comment/Add";
-import List from "../Comment/List";
+import List from "../Layout/List";
 import Edit from "../Comment/Edit";
 import Detail from "../Comment/Detail";
-import Home from "../Layout/Home";
+import Home from "../Layout/Index";
 import NoPage from "../Common/NoPage";
 
 const unblocker = (Block, prop) => {

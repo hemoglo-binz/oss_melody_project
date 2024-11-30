@@ -13,25 +13,6 @@ const ShowSong_t = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleDelete = async (id) => {
-        // console.log("id : -", id);
-        setIsLoading(true);
-        try {
-            const response = await fetch(ShowSong_tApi.concat("/") + id, {
-                method: "DELETE",
-            });
-            if (!response.ok) {
-                throw new Error("Failed to delete item");
-            }
-            setSong(_song.filter((item) => item.id !== id));
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setIsLoading(false);
-            window.location.replace("/");
-        }
-    };
-
     useEffect(() => {
         const getSongs = () => {
             axios
@@ -69,7 +50,7 @@ const ShowSong_t = () => {
                                     <td>{item.rank}</td>
                                     <td>
                                         <Link
-                                            to={`${handler["detail"]["link"]}${item.id}`}
+                                            to={`${handler["detail"]["link"]}${item.title}`}
                                         >
                                             {item.title}
                                         </Link>
