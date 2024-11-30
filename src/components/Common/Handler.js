@@ -1,5 +1,5 @@
 import Add from "../Comment/Add";
-import List from "../Layout/List";
+import List from "../Layout/Chart";
 import Edit from "../Comment/Edit";
 import Detail from "../Comment/Detail";
 import Home from "../Layout/Index";
