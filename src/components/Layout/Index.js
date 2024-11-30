@@ -11,8 +11,8 @@ const ShowSong_t = () => {
     const ShowSong_tApi = Api(1);
 
     const [_song, setSong] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null); //
+    const [isLoading] = useState(false);
+    const [error] = useState(null);
 
     useEffect(() => {
         const getSongs = () => {
@@ -62,7 +62,13 @@ const ShowSong_t = () => {
                             );
                         })}
                     </div>
-                    <button style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">
+                    <button
+                        style={{
+                            "margin-top": "20px",
+                            padding: "10px 20px",
+                            "font-size": "16px",
+                        }}
+                    >
                         More
                     </button>
                 </div>

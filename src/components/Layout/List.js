@@ -10,8 +10,8 @@ const ShowSong_t = () => {
     const ShowSong_tApi = Api(1);
 
     const [_song, setSong] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [isLoading] = useState(false);
+    const [error] = useState(null);
     const [sort, setSort] = useState(0);
     const [search, setSearch] = useState("");
 
@@ -28,21 +28,21 @@ const ShowSong_t = () => {
                                 .includes(search.toLowerCase())
                         );
                     }
-                    if (sort == 1) {
+                    if (sort === 1) {
                         songs = songs.sort((a, b) => b.rank - a.rank);
-                    } else if (sort == 2) {
+                    } else if (sort === 2) {
                         songs = songs.sort((a, b) =>
                             a.title.localeCompare(b.title)
                         );
-                    } else if (sort == 3) {
+                    } else if (sort === 3) {
                         songs = songs.sort((a, b) =>
                             b.title.localeCompare(a.title)
                         );
-                    } else if (sort == 4) {
+                    } else if (sort === 4) {
                         songs = songs.sort((a, b) =>
                             a.artist.localeCompare(b.artist)
                         );
-                    } else if (sort == 5) {
+                    } else if (sort === 5) {
                         songs = songs.sort((a, b) =>
                             b.artist.localeCompare(a.artist)
                         );
