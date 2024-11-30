@@ -37,7 +37,6 @@ const ShowSong_t = () => {
                 {isLoading && <Loader />}
                 {error && <p>Error: {error}</p>}
                 <div class="container">
-                    <h1>Hear what's trending for free in the community</h1>
                     <div class="grid">
                         {_song?.map((item, i) => {
                             return (
