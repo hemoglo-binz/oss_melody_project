@@ -10,13 +10,17 @@ const ShowSong_t = () => {
     const ShowSong_tApi = Api(1);
 
     const [_song, setSong] = useState([]);
-    const [isLoading] = useState(false);
-    const [error] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [sort, setSort] = useState(0);
     const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalSongs, setTotalSongs] = useState(0);
+    const songsPerPage = 20;
 
     useEffect(() => {
         const getSongs = (sort = 0, search = "") => {
+            setIsLoading(true);
             axios
                 .get(ShowSong_tApi)
                 .then((res) => {
@@ -25,7 +29,7 @@ const ShowSong_t = () => {
                         songs = songs.filter((song) =>
                             song.title
                                 .toLowerCase()
-                                .includes(search.toLowerCase())
+                                .includes(search.toLowerCase().trim())
                         );
                     }
                     if (sort === 1) {
@@ -47,18 +51,20 @@ const ShowSong_t = () => {
                             b.artist.localeCompare(a.artist)
                         );
                     }
-                    if (songs.length > 20) {
-                        songs = songs.slice(0, 20);
-                    }
-                    setSong(songs);
+                    setTotalSongs(songs.length);
+                    const startIndex = (currentPage - 1) * songsPerPage;
+                    const endIndex = startIndex + songsPerPage;
+                    setSong(songs.slice(startIndex, endIndex));
+                    setIsLoading(false);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    setError(err.message);
+                    setIsLoading(false);
                 });
         };
 
         getSongs(sort, search);
-    }, [ShowSong_tApi, sort, search]);
+    }, [ShowSong_tApi, sort, search, currentPage]);
 
     const handleSort = (sortType) => {
         setSort(sortType);
@@ -66,43 +72,54 @@ const ShowSong_t = () => {
 
     const handleSearch = () => {
         setSearch(document.getElementById("searchInput").value);
+        setCurrentPage(1);
     };
 
-    if (_song.length < 0) {
-        return <h1>no song found</h1>;
-    } else {
-        return (
-            <div className="mt-5">
-                {isLoading && <Loader />}
-                {error && <p>Error: {error}</p>}
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                Rank
-                                <button onClick={() => handleSort(0)}>↑</button>
-                                <button onClick={() => handleSort(1)}>↓</button>
-                            </th>
-                            <th>
-                                Title
-                                <button onClick={() => handleSort(2)}>↑</button>
-                                <button onClick={() => handleSort(3)}>↓</button>
-                            </th>
-                            <th>
-                                Singer
-                                <button onClick={() => handleSort(4)}>↑</button>
-                                <button onClick={() => handleSort(5)}>↓</button>
-                                <input
-                                    id="searchInput"
-                                    type="text"
-                                    placeholder="Search by Title"
-                                />
-                                <button onClick={handleSearch}>Search</button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {_song?.map((item, i) => {
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(totalSongs / songsPerPage)) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage((prevPage) => prevPage - 1);
+        }
+    };
+
+    return (
+        <div className="mt-5">
+            {isLoading && <Loader />}
+            {error && <p>Error: {error}</p>}
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Rank
+                            <button onClick={() => handleSort(0)}>↑</button>
+                            <button onClick={() => handleSort(1)}>↓</button>
+                        </th>
+                        <th>
+                            Title
+                            <button onClick={() => handleSort(2)}>↑</button>
+                            <button onClick={() => handleSort(3)}>↓</button>
+                        </th>
+                        <th>
+                            Singer
+                            <button onClick={() => handleSort(4)}>↑</button>
+                            <button onClick={() => handleSort(5)}>↓</button>
+                            <input
+                                id="searchInput"
+                                type="text"
+                                placeholder="Search by Title"
+                            />
+                            <button onClick={handleSearch}>Search</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {_song.length > 0 &&
+                        _song?.map((item, i) => {
                             return (
                                 <tr key={i + 1}>
                                     <td>{item.rank}</td>
@@ -117,11 +134,32 @@ const ShowSong_t = () => {
                                 </tr>
                             );
                         })}
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+            <div className="pagination-controls">
+                <button
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                <span>
+                    {" "}
+                    Page {currentPage} ({(currentPage - 1) * songsPerPage + 1}~
+                    {Math.min(currentPage * songsPerPage, totalSongs)} of{" "}
+                    {totalSongs}){" "}
+                </span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={
+                        currentPage >= Math.ceil(totalSongs / songsPerPage)
+                    }
+                >
+                    Next
+                </button>
             </div>
-        );
-    }
+        </div>
+    );
 };
 
 export default ShowSong_t;
