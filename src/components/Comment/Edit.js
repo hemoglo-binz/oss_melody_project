@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 // import { useParams, useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import Api from "../Common/Api";
-import "./Comment.css";
+import "./Comment.scss";
 // import URLhdl from "../Common/Handler";
 const EditCC = () => {
     // const handler = URLhdl();

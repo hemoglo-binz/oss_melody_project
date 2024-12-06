@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import Api from "../Common/Api";
-import "./Comment.css";
+import "./Comment.scss";
 // import URLhdl from "../Common/Handler";
 const CreateCC_temp = () => {
     // const handler = URLhdl();
