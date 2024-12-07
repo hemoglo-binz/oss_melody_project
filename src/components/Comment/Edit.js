@@ -1,90 +1,153 @@
-import axios from "axios";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-// import { useParams, useNavigate } from "react-router-dom";
-import Loader from "../Common/Loader";
-import Api from "../Common/Api";
+import axios from "axios";
 import "./Comment.scss";
-// import URLhdl from "../Common/Handler";
-const EditCC = () => {
-    // const handler = URLhdl();
+import Api from "../Common/Api";
+
+const EditCommentPage = () => {
     const { idp } = useParams();
-    console.log(idp);
-    const [_com, setCC] = useState({
-        id: idp,
-        userID: "",
+    const [comment, setComment] = useState({
+        user: "",
+        pw: "",
+        star: 0,
         title: "",
-        body: "",
+        comm: "",
     });
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    // const navigate = useNavigate();
-    const getCCApi = Api();
-
-    const inputRf = useRef([]);
-
-    const { id, userID, title, body } = _com;
-
-    const isVaildID = id.length >= 1;
-    const isVaildUID = userID.length >= 1;
-    const isVaildTitle = title.length >= 1;
-    const isVaildBody = body.length >= 1;
+    const [inputPw, setInputPw] = useState("");
+    const getCommentApi = `${Api()}/${idp}`;
+    const ratingRef = useRef(null);
 
     useEffect(() => {
-        const getCC = () => {
-            axios
-                .get(getCCApi.concat("/") + id)
-                .then((item) => {
-                    setCC(item.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
+        const rateWrap = ratingRef.current;
+        const stars = rateWrap.querySelectorAll(".star-icon");
+        let label = rateWrap.querySelectorAll(".rating__label"),
+            labelLength = label.length,
+            opacityHover = "0.5";
 
-        getCC();
-    }, [getCCApi, id]);
+        checkedRate();
+
+        rateWrap.addEventListener("mouseenter", () => {
+            label.forEach((label, idx) => {
+                label.addEventListener("mouseenter", () => {
+                    initStars();
+                    filledRate(idx, labelLength);
+
+                    for (let i = 0; i < stars.length; i++) {
+                        if (stars[i].classList.contains("filled")) {
+                            stars[i].style.opacity = opacityHover;
+                        }
+                    }
+                });
+
+                label.addEventListener("mouseleave", () => {
+                    stars.forEach((star) => (star.style.opacity = "1"));
+                    checkedRate();
+                });
+
+                rateWrap.addEventListener("mouseleave", () => {
+                    stars.forEach((star) => (star.style.opacity = "1"));
+                });
+            });
+        });
+
+        function filledRate(index, length) {
+            if (index <= length) {
+                for (let i = 0; i <= index; i++) {
+                    stars[i].classList.add("filled");
+                }
+            }
+        }
+
+        function checkedRate() {
+            if (comment.star) {
+                const value = comment.star;
+                const stars = rateWrap.querySelectorAll(".rating__input");
+                stars.forEach((star) => {
+                    if (parseFloat(star.value) === value) {
+                        star.checked = true;
+                    }
+                });
+            }
+            let checkedRadio = rateWrap.querySelectorAll(
+                '.rating input[type="radio"]:checked'
+            );
+
+            initStars();
+            checkedRadio.forEach((radio) => {
+                let previousSiblings = prevAll(radio);
+
+                for (let i = 0; i < previousSiblings.length; i++) {
+                    previousSiblings[i]
+                        .querySelector(".star-icon")
+                        .classList.add("filled");
+                }
+
+                radio.nextElementSibling.classList.add("filled");
+
+                function prevAll() {
+                    let radioSiblings = [],
+                        prevSibling =
+                            radio.parentElement.previousElementSibling;
+
+                    while (prevSibling) {
+                        radioSiblings.push(prevSibling);
+                        prevSibling = prevSibling.previousElementSibling;
+                    }
+                    return radioSiblings;
+                }
+            });
+        }
+
+        function initStars() {
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].classList.remove("filled");
+            }
+        }
+        axios
+            .get(getCommentApi)
+            .then((res) => {
+                setComment(res.data);
+                setTimeout(() => checkedRate(), 0);
+                setComment(res.data);
+            })
+            .catch((err) => {
+                console.error("Error fetching comment:", err);
+            });
+    }, [getCommentApi]);
+
+    const handleInputChange = (e) => {
+        const { name, value, type } = e.target;
+        const newValue = type === "radio" ? parseFloat(value) : value;
+        setComment({ ...comment, [name]: newValue });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        var isOk = 1;
-        if (!isVaildID) {
-        }
-        if (!isVaildBody) {
-            isOk = 0;
-            inputRf.current[2].focus();
-            setCC({
-                ..._com,
-                body: "",
-            });
-        }
-        if (!isVaildTitle) {
-            isOk = 0;
-            inputRf.current[1].focus();
-            setCC({
-                ..._com,
-                title: "",
-            });
-        }
-        if (!isVaildUID) {
-            isOk = 0;
-            inputRf.current[0].focus();
-            setCC({
-                ..._com,
-                userID: "",
-            });
-        }
-        if (!isOk) {
-            return 0;
+        if (comment.pw !== inputPw) {
+            alert("Passwords do not match!");
+            return;
         }
 
-        fetch(getCCApi.concat("/") + id, {
+        fetch(getCommentApi, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(_com),
+            body: JSON.stringify({
+                ...comment,
+                date: new Date()
+                    .toLocaleString("en-GB", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                    })
+                    .replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$3/$2/$1")
+                    .replace(",", ""),
+            }),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -93,91 +156,240 @@ const EditCC = () => {
                 return response.json();
             })
             .then((data) => {
-                // setIsLoading(true);
-                // navigate(handler["list"]["link"]);
-                // window.location.replace("/");
+                alert("Comment updated successfully!");
+                window.history.back();
             })
             .catch((error) => {
-                setError(error.message);
-                setIsLoading(false);
+                console.error("Error updating comment:", error);
             });
     };
 
-    const handleInput = (e) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        // console.log(name, value);
-        setCC({ ..._com, [name]: value });
-        // handleSubmit(e);
+    const handleDelete = async () => {
+        if (comment.pw !== inputPw) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        try {
+            const response = await fetch(getCommentApi, {
+                method: "DELETE",
+            });
+            if (!response.ok) {
+                throw new Error("Failed to delete comment");
+            }
+            alert("Comment deleted successfully!");
+            window.history.back();
+        } catch (error) {
+            console.error("Error deleting comment:", error);
+        }
     };
 
     return (
-        <div className="_com-form">
-            <div className="heading">
-                {isLoading && <Loader />}
-                {error && <p>Error: {error}</p>}
-                <p>Edit Form</p>
-            </div>
-            <form className="form_edit">
-                <div className="mb-3">
-                    <label htmlFor="userID" className="form-label">
-                        User ID
-                    </label>
+        <div className="edit-comment-page">
+            <h3>Edit Comment</h3>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Username:</label>
                     <input
                         type="text"
-                        className="form-control"
-                        id="userID"
-                        name="userID"
-                        value={_com.userID || ""}
-                        onChange={handleInput}
-                        onInput={handleSubmit}
-                        ref={(e) => (inputRf.current[0] = e)}
+                        name="user"
+                        value={comment.user}
+                        onChange={handleInputChange}
+                        required
                     />
-                    {!isVaildUID ? (
-                        <span>Please check your User ID.</span>
-                    ) : null}
                 </div>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="title" className="form-label">
-                        Title
-                    </label>
+                <div className="form-group">
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        name="pw"
+                        value={inputPw}
+                        onChange={(e) => setInputPw(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <div className="wrap" ref={ratingRef}>
+                        <div className="rating">
+                            <label
+                                className="rating__label rating__label--half"
+                                htmlFor="starhalf"
+                            >
+                                <input
+                                    type="radio"
+                                    id="starhalf"
+                                    className="rating__input"
+                                    name="star"
+                                    value="0.5"
+                                    checked={comment.star === 0.5}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--full"
+                                htmlFor="star1"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star1"
+                                    className="rating__input"
+                                    name="star"
+                                    value="1"
+                                    checked={comment.star === 1}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--half"
+                                htmlFor="star1half"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star1half"
+                                    className="rating__input"
+                                    name="star"
+                                    value="1.5"
+                                    checked={comment.star === 1.5}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--full"
+                                htmlFor="star2"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star2"
+                                    className="rating__input"
+                                    name="star"
+                                    value="2"
+                                    checked={comment.star === 2}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--half"
+                                htmlFor="star2half"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star2half"
+                                    className="rating__input"
+                                    name="star"
+                                    value="2.5"
+                                    checked={comment.star === 2.5}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--full"
+                                htmlFor="star3"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star3"
+                                    className="rating__input"
+                                    name="star"
+                                    value="3"
+                                    checked={comment.star === 3}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--half"
+                                htmlFor="star3half"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star3half"
+                                    className="rating__input"
+                                    name="star"
+                                    value="3.5"
+                                    checked={comment.star === 3.5}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--full"
+                                htmlFor="star4"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star4"
+                                    className="rating__input"
+                                    name="star"
+                                    value="4"
+                                    checked={comment.star === 4}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--half"
+                                htmlFor="star4half"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star4half"
+                                    className="rating__input"
+                                    name="star"
+                                    value="4.5"
+                                    checked={comment.star === 4.5}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                            <label
+                                className="rating__label rating__label--full"
+                                htmlFor="star5"
+                            >
+                                <input
+                                    type="radio"
+                                    id="star5"
+                                    className="rating__input"
+                                    name="star"
+                                    value="5"
+                                    checked={comment.star === 5}
+                                    onChange={handleInputChange}
+                                />
+                                <span className="star-icon"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label>Title:</label>
                     <input
                         type="text"
-                        className="form-control"
-                        id="title"
                         name="title"
-                        value={_com.title || ""}
-                        onChange={handleInput}
-                        onInput={handleSubmit}
-                        ref={(e) => (inputRf.current[1] = e)}
+                        value={comment.title}
+                        onChange={handleInputChange}
+                        required
                     />
-                    {!isVaildTitle ? (
-                        <span>Please check your User ID.</span>
-                    ) : null}
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="body" className="form-label">
-                        Comment
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="body"
-                        name="body"
-                        value={_com.body || ""}
-                        onChange={handleInput}
-                        onInput={handleSubmit}
-                        ref={(e) => (inputRf.current[2] = e)}
+                <div className="form-group">
+                    <label>Comment:</label>
+                    <textarea
+                        name="comm"
+                        value={comment.comm}
+                        onChange={handleInputChange}
+                        required
                     />
-                    {!isVaildBody ? (
-                        <span>Please check your User ID.</span>
-                    ) : null}
                 </div>
-                {/* <button type="submit" className="btn btn-primary submit-btn">
-                    EDIT
-                </button> */}
+                <button type="submit">Update Comment</button>
+                <button type="button" onClick={handleDelete}>
+                    Delete Comment
+                </button>
             </form>
         </div>
     );
 };
-export default EditCC;
+
+export default EditCommentPage;

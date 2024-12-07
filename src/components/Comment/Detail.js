@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "./Comment.scss";
 import Api from "../Common/Api";
+import URLhdl from "../Common/Handler";
 
 const SongCommentPage = () => {
+    const handler = URLhdl();
     const [songInfo, setSongInfo] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState({
@@ -409,6 +411,12 @@ const SongCommentPage = () => {
                             <span className="comment-stars">
                                 ⭐ {comment.star}
                             </span>
+                            <Link
+                                to={`${handler["edit"]["link"]}${comment.id}`}
+                                className="edit-link"
+                            >
+                                Edit
+                            </Link>
                         </div>
                     </div>
                 ))}
