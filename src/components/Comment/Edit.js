@@ -113,7 +113,7 @@ const EditCommentPage = () => {
             .catch((err) => {
                 console.error("Error fetching comment:", err);
             });
-    }, [getCommentApi]);
+    }, [getCommentApi, comment.star]);
 
     const handleInputChange = (e) => {
         const { name, value, type } = e.target;
