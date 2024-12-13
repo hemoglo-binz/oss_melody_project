@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import "./Comment.scss";
 import Api from "../Common/Api";
 import URLhdl from "../Common/Handler";
+import "../../design.css";
+
 
 const SongCommentPage = () => {
     const handler = URLhdl();

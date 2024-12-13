@@ -3,6 +3,8 @@ import React, { useRef, useState } from "react";
 import Loader from "../Common/Loader";
 import Api from "../Common/Api";
 import "./Comment.scss";
+import "../../design.css";
+
 // import URLhdl from "../Common/Handler";
 const CreateCC_temp = () => {
     // const handler = URLhdl();

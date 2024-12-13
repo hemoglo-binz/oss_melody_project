@@ -5,6 +5,7 @@ import Loader from "../Common/Loader";
 import Api from "../Common/Api";
 import URLhdl from "../Common/Handler";
 import "./Layout.css";
+import "../../design.css";
 
 const ShowSong_t = () => {
     const handler = URLhdl();

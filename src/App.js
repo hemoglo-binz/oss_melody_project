@@ -2,6 +2,8 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Common/Header";
 import URLhdl from "./components/Common/Handler";
+import "./design.css";
+
 function App() {
     const handler = URLhdl();
     return (

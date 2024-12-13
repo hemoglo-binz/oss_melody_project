@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Common.css";
+import "../../design.css";
 import URLhdl from "../Common/Handler";
 export default function Header() {
     const handler = URLhdl();

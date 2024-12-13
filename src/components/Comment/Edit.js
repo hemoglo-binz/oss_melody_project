@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Comment.scss";
 import Api from "../Common/Api";
+import "../../design.css";
+
 
 const EditCommentPage = () => {
     const { idp } = useParams();

@@ -1,0 +1,292 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+
+nav.navbar {
+  background: linear-gradient(90deg, #ff5500, #ff7700);
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+nav.navbar .navbar-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+nav.navbar .nav-link {
+  color: white !important;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+nav.navbar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  padding: 8px 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  max-width: 400px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  padding: 5px 10px;
+  color: #333;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+.search-bar button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ff5500;
+  transition: color 0.3s ease;
+}
+
+.search-bar button:hover {
+  color: #ff7700;
+}
+
+.table {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.table th {
+  background: linear-gradient(90deg, #ff5500, #ff7700);
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table td a {
+  color: #ff5500;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.table td a:hover {
+  text-decoration: underline;
+}
+
+
+.table th button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  margin-left: 5px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.table th button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  text-decoration: underline;
+}
+
+
+.pagination-controls button {
+  border: none;
+  background: #ff5500;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin: 0 5px;
+}
+
+.pagination-controls button:hover {
+  background: #ff7700;
+}
+
+.pagination-controls span {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+
+.container button {
+  background: #ff5500;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.container button:hover {
+  background: #ff7700;
+}
+
+
+.comment-form, .edit-comment-page form {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.comment-form h3, .edit-comment-page h3 {
+  margin-bottom: 15px;
+  color: #ff5500;
+  text-align: center;
+}
+
+.comment-form .form-group, .edit-comment-page .form-group {
+  margin-bottom: 15px;
+}
+
+.comment-form label, .edit-comment-page label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-form input, .edit-comment-page input,
+.comment-form textarea, .edit-comment-page textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.comment-form input:focus, .edit-comment-page input:focus,
+.comment-form textarea:focus, .edit-comment-page textarea:focus {
+  outline: none;
+  border-color: #ff7700;
+  box-shadow: 0 0 5px rgba(255, 119, 0, 0.5);
+}
+
+.comment-form button, .edit-comment-page button {
+  background: #ff5500;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.comment-form button:hover, .edit-comment-page button:hover {
+  background: #ff7700;
+}
+
+.comment-form .form-group .rating, .edit-comment-page .form-group .rating {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+
+.comments-section {
+  text-align: left;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.comment-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-item .edit-link {
+  display: inline-block;
+  background: #ff5500;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.comment-item .edit-link:hover {
+  background: #ff7700;
+}
+
+.comment-form label, .edit-comment-page label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  text-align: left; 
+}
+
+
+.song-info img {
+  width: 150px; 
+  height: 150px;
+  border-radius: 8px; 
+  margin-bottom: 15px;
+}
